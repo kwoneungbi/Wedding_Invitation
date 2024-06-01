@@ -4,15 +4,17 @@ import './scss/global.scss'
 import styles from './App.module.scss'
 import { useEffect, useState } from 'react'
 import FullScreenMessage from '@shared/FullScreenMessage'
-
 import Heading from './components/sections/Heading'
 import Video from './components/sections/Video'
-
 import { Wedding } from '@models/wedding'
 import ImageGallery from './components/sections/ImageGallery'
 import Intro from './components/sections/Intro'
 import Invitation from './components/sections/Invitation'
 import Calendar from './components/sections/Calendar'
+import Map from './components/sections/Map'
+import Contact from './components/sections/Contact'
+import Share from './components/sections/Share'
+import AttendCountModal from './components/AttendCountModal'
 
 const cx = classNames.bind(styles)
 
@@ -26,6 +28,7 @@ function App() {
     setLoading(true)
     fetch('http://localhost:8888/wedding')
       .then((response) => {
+        // console.log('response', response)
         if (!response.ok) {
           throw new Error('청첩장 정보를 불러오지 못했습니다.')
         }
@@ -78,7 +81,10 @@ function App() {
       <Invitation message={invitation} />
       <ImageGallery images={galleryImages} />
       <Calendar date={date} />
-      {JSON.stringify(wedding)}
+      <Map location={location} />
+      <Contact groom={groom} bride={bride} />
+      <Share groomName={groom.name} brideName={bride.name} date={date} />
+      <AttendCountModal wedding={wedding} />
     </div>
   )
 }

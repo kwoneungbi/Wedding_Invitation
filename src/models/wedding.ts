@@ -36,4 +36,5 @@ export interface Person {
   name: string
   phoneNumber: string
   account: Account
+  kakaopayLink?: string
 }
